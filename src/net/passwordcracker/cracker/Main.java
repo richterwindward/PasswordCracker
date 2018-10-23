@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import net.passwordcracker.cracker.vector.WindwardVector;
 
@@ -16,14 +17,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        System.out.println(Main.class.getClassLoader().getResource("GUI.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getClassLoader().getResource("GUI.fxml"));
         primaryStage.setTitle("Password Cracker");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        URL nounList = Main.class.getClassLoader().getResource("englishdictionary.txt");
-        System.out.println(nounList);
-        File nounfile = new File(nounList.getFile());
-        WindwardVector wv = new WindwardVector(nounfile);
-        wv.attack("Hippopotamus&2020");
+        primaryStage.setScene(new Scene(root, ((AnchorPane) root).getPrefWidth(), ((AnchorPane) root).getPrefHeight()));
         primaryStage.show();
     }
 

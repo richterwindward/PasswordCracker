@@ -23,6 +23,6 @@
       <Button fx:id="crack" layoutX="138.0" layoutY="145.0" mnemonicParsing="false" onAction="#crack" text="Crack!" />
       <TextField fx:id="password" layoutX="84.0" layoutY="72.0" />
       <Label fx:id="attempts" layoutX="132.0" layoutY="191.0" text="Attempts: 1" />
-      <ComboBox fx:id="vectors" layoutX="93.0" layoutY="108.0" prefWidth="150.0" promptText="Pick a Vector!" />
+      <ComboBox fx:id="vector" layoutX="93.0" layoutY="108.0" prefWidth="150.0" promptText="Pick a Vector!" />
    </children>
 </AnchorPane>
