@@ -10,6 +10,8 @@ import net.passwordcracker.cracker.vector.WindwardVector;
 import java.io.File;
 import java.net.URL;
 
+import java.io.File;
+
 public class Main extends Application {
 
     @Override
