@@ -9,6 +9,7 @@ import net.passwordcracker.cracker.vector.DictionaryAttackVector;
 import net.passwordcracker.cracker.vector.Vector;
 import net.passwordcracker.cracker.vector.WindwardVector;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -31,20 +32,15 @@ public class Controller
         INSTANCE = this;
         vectors.put("Brute Force",new BruteforceVector());
         vectors.put("Dictionary Attack",new DictionaryAttackVector());
-      //  vectors.put("Windward Attack",new WindwardVector());
+        vectors.put("Windward Attack",new WindwardVector(new File(this.getClass().getResource("englishdictionary.txt").getFile())));
         vector.getItems().addAll("Brute Force","Dictionary Attack","Windward Attack");
     }
     public void crack()
     {
         final String vect = vector.getValue();
         final Vector attack = vectors.get(vect);
-        if(attack instanceof WindwardVector)
-        {
-            attack.attack(SERVICE, password.getText().split("[?!@#$%^&*()]")[0],password.getText().split("[?!@#$%^&*()]")[1]);
-        }
-        else {
-            attack.attack(SERVICE,password.getText(),null);
-        }
+        attack.attack(SERVICE,password.getText(),null);
+
 
     }
 

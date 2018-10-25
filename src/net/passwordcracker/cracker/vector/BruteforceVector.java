@@ -23,7 +23,7 @@ public class BruteforceVector implements Vector
         while ( comparisons.get() <= LIMIT && ! found.get() )
         {
             Platform.runLater(() -> {
-                Controller.get().attempts.setText(comparisons.toString());
+                Controller.get().attempts.setText("About " + comparisons.toString() + " Comparisons");
             });
             pool.submit(() -> {
                 final SplittableRandom local = random.split();

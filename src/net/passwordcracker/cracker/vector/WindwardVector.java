@@ -1,23 +1,25 @@
 package net.passwordcracker.cracker.vector;
 
 
-import com.sun.tools.javac.util.StringUtils;
-import net.passwordcracker.cracker.LineSeparatedList;
+import javafx.application.Platform;
+import net.passwordcracker.cracker.Controller;
+import net.passwordcracker.cracker.LineSeperatedList;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.concurrent.ExecutorService;
 
-public class WindwardVector
+public class WindwardVector implements Vector
 {
     private final String SPECIAL_SYMBOLS = "!@#$%^&*()?";
     private final String[] GRADUATION_YEARS = {"2019", "2020", "2021", "2022", "2023", "2024"};
 
     private File nounsFile;
-    private LineSeparatedList wrappedNounsFile;
+    private LineSeperatedList wrappedNounsFile;
 
     public WindwardVector(File nounsFile) {
         this.nounsFile = nounsFile;
-        this.wrappedNounsFile = new LineSeparatedList(nounsFile);
+        this.wrappedNounsFile = new LineSeperatedList(nounsFile);
     }
 
     private String[] computeGraduationYears() {
@@ -29,12 +31,15 @@ public class WindwardVector
         return graduationYears;
     }
 
-    public int attack(String password) {
+    public int attack(ExecutorService pool, String password, String mask) {
         boolean found = false;
-
+        int comparisons = 0;
         while(!found) {
-            String nextNoun = wrappedNounsFile.getNextItem();
-
+            String nextNoun = wrappedNounsFile.getNextPassword();
+            final int temp = comparisons;
+            Platform.runLater(() -> {
+                Controller.get().attempts.setText("About " + temp + " Comparisons");
+            });
             if(nextNoun == null) {
                 break;
             }
@@ -50,6 +55,7 @@ public class WindwardVector
                     GRADUATION_YEARS) {
                     pwd.append(year);
                     if(pwd.toString().equals(password)) {
+                        comparisons++;
                         System.out.println("Found password: " + pwd.toString());
                         return 1;
                     }
@@ -59,6 +65,6 @@ public class WindwardVector
             }
         }
 
-        return 0;
+        return comparisons;
     }
 }

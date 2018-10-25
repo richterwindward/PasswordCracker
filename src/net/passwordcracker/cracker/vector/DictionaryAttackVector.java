@@ -22,7 +22,7 @@ public class DictionaryAttackVector implements Vector
         while (!found.get() && (pass = list.getNextPassword()) != null)
         {
             Platform.runLater(() -> {
-                Controller.get().attempts.setText(comparisons.toString());
+                Controller.get().attempts.setText("About " + comparisons.toString() + " Comparisons");
             });
             final String javaDumbBruh = pass;
             pool.submit(() -> {
