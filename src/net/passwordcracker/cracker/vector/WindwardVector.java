@@ -55,6 +55,7 @@ public class WindwardVector implements Vector
                     GRADUATION_YEARS) {
                     pwd.append(year);
                     if(pwd.toString().equals(password)) {
+                        Controller.alert("Windward Vector: Tips","There really isn't too much you can do here! Windward passwords are very predictable, and the school makes you use them. Sorry bud, fresh out of luck");
                         comparisons++;
                         System.out.println("Found password: " + pwd.toString());
                         return 1;

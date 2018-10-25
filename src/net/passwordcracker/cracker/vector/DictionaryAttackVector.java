@@ -28,6 +28,7 @@ public class DictionaryAttackVector implements Vector
             pool.submit(() -> {
                 comparisons.addAndGet(1);
                 if(javaDumbBruh.equals(password)) {
+                    Controller.alert("Dictionary Vector","Your password seems to be quite common, if this attack guessed it. Try adding in some symbols, numbers, and capitals!");
                     found.set(true);
                     System.out.println("Position/Comparison " + comparisons.get() + 1 + " Found: " + javaDumbBruh);
                 }
