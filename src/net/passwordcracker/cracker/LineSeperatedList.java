@@ -33,4 +33,8 @@ public class LineSeperatedList {
         }
     }
 
+    public String sanitize(String s) {
+        return s.replace(".", "").replace(" ", "").replace("\'", "");
+    }
+
 }

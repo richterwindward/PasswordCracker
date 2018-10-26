@@ -24,7 +24,9 @@ public class DictionaryAttackVector implements Vector
             Platform.runLater(() -> {
                 Controller.get().attempts.setText("About " + comparisons.toString() + " Comparisons");
             });
+
             final String javaDumbBruh = pass;
+
             pool.submit(() -> {
                 comparisons.addAndGet(1);
                 if(javaDumbBruh.equals(password)) {

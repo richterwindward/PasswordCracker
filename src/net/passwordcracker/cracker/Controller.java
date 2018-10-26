@@ -32,7 +32,7 @@ public class Controller
         INSTANCE = this;
         vectors.put("Brute Force",new BruteforceVector());
         vectors.put("Dictionary Attack",new DictionaryAttackVector());
-        vectors.put("Windward Attack",new WindwardVector(new File(this.getClass().getResource("englishdictionary.txt").getFile())));
+        vectors.put("Windward Attack",new WindwardVector(new File(this.getClass().getClassLoader().getResource("englishdictionary.txt").getFile())));
         vector.getItems().addAll("Brute Force","Dictionary Attack","Windward Attack");
     }
     public void crack()
@@ -40,8 +40,6 @@ public class Controller
         final String vect = vector.getValue();
         final Vector attack = vectors.get(vect);
         attack.attack(SERVICE,password.getText(),null);
-
-
     }
 
     public static Controller get()
