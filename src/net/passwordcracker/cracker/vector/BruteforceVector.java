@@ -36,6 +36,7 @@ public class BruteforceVector implements Vector
                 comparisons.addAndGet(1);
                 if (builder.toString().equals(password))
                 {
+                    Controller.alert("Bruteforce Vector","Well, bruteforce guessed your password. Bruteforce is extremely inefficient, and it could have just been down to luck. But try lengthening your password");
                     found.set(true);
                     System.out.println("Position/Comparison " + comparisons.get() + 1 + " Found: " + builder.toString());
 

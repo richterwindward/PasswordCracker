@@ -40,13 +40,16 @@ public class WindwardVector implements Vector
         boolean found = false;
         int comparisons = 0;
 
-        while(!found) {
-            String nextNoun;
 
-            if((nextNoun = this.wrappedNounsFile.sanitize(wrappedNounsFile.getNextPassword()).toLowerCase()) == null) {
-                /* check EOF then return */
+        while(!found) {
+            String nextItem = wrappedNounsFile.getNextPassword();
+
+            if(nextItem == null) {
+                /* check for EOF */
                 break;
             }
+
+            nextItem = nextItem.toLowerCase();
 
             final int temp = comparisons;
 
@@ -55,7 +58,7 @@ public class WindwardVector implements Vector
             });
 
             /* capitalize the string */
-            String capitalizedItem = nextNoun.substring(0, 1).toUpperCase() + nextNoun.substring(1);
+            String capitalizedItem = nextItem.substring(0, 1).toUpperCase() + nextItem.substring(1);
 
             StringBuilder pwd = new StringBuilder(capitalizedItem);
             int maskLen = pwd.length();
@@ -68,6 +71,7 @@ public class WindwardVector implements Vector
                     pwd.append(year);
                     comparisons++;
                     if(pwd.toString().equals(password)) {
+                        System.out.println("Windward Vector: Tips\nThere really isn't too much you can do here! Windward passwords are very predictable, and the school makes you use them. Sorry bud, fresh out of luck");
                         System.out.println("Found password: " + pwd.toString());
                         return comparisons;
                     }
